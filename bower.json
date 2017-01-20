@@ -1,0 +1,38 @@
+{
+  "name": "booktitres",
+  "version": "1.0.0",
+  "description": "Subtitles for audio books - editor and phrase-by-phrase player",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "booktitres",
+    "booktitler",
+    "subtitles",
+    "audiobooks"
+  ],
+  "authors": [
+    "Rustam Apaev"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "angular": "~1.4.7",
+    "angular-route": "^1.6.0",
+    "angular-ui-router": "^0.3.2",
+    "angular-resource": "^1.6.1",
+    "angular-mocks": "^1.6.1",
+    "angular-media-events": "^1.1.0"
+  },
+  "resolutions": {
+    "angular": "1.6.1"
+  }
+}

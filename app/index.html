@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="booktitresApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head 
+         content must come *after* these tags -->
+    
+    <title>BookTitres</title>    
+        <!-- Bootstrap -->
+<!-- build:css styles/main.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+<!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    
+ <!--
+    <div ui-view="header"></div>
+    <div ui-view="content"></div>
+    <div ui-view="footer"></div>
+  -->
+   <div class="jumbotron">
+       <h1>BookTitler </h1>
+       <p>Great tool for create and use subtitles for audiobooks</p> 
+   </div>
+  <div class="container" ng-controller="EditorController">
+
+
+        <h2>1. Редактирование</h2>
+
+           <div class="row">
+              <div class="col-md-4"> 
+                   <label for="mediaLink" class="control-label">Media link</label>
+                   <input ng-model="page.mediaLink" placeholder="media link" type="text" name="mediaLink" class="form-control" >
+                   <audio id="media" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls ></audio>
+
+                   <button class="glyphicon glyphicon-screenshot btn-lg" ng-click="setTiming()"></button>
+               </div>
+            </div>  
+            <br />   
+                <div class="list-group">
+                    <div class="list-group-item form-inline" ng-repeat="phrase in phrases track by $index" ng-if="$index > 0">{{$index}}.
+                       <input class="form-control" type="text" value={{phrase.text}}>     
+                       <input class="form-control phrase-timing" type="number" step="0.1" value={{phrase.timingStart}} >
+                       <input class="form-control phrase-timing" type="number" step="0.1" value={{phrase.timingEnd}}>
+                       <span class="glyphicon glyphicon-volume-up" ng-click="playPhrase($index)"></span>
+                    </div>
+                </div> 
+       <div class="row" >
+            <div class="col-md-2">
+
+               <p>Timing</p>
+                <textarea ng-model="timingText" id="timingText" class="form-control"></textarea>
+            </div>
+            <div class="col-md-5">
+               <p>Original text</p>
+                <textarea ng-model="originalText" id="originalText" class="form-control"></textarea>    
+            </div> 
+            <div class="col-md-5">
+               <p>Translation text</p>
+                <textarea ng-model="translationText" id="translationText" class="form-control"></textarea>
+            </div>  
+       </div>
+   
+    </div>
+   
+    
+
+<!-- build:js scripts/main.js -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/angular-media-events/dist/media-events.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/services/mediaFactory.js"></script>
+    <script src="scripts/services/phrasesFactory.js"></script>   
+<!-- endbuild -->
+
+</body>
+
+</html>

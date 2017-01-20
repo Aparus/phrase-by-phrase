@@ -1,0 +1,8 @@
+.jumbotron {padding: 20px;}
+
+textarea {
+    width: 100%;
+}
+input {width: 100%;} 
+
+input.phrase-timing {width: 100px!important;}
