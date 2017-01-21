@@ -22,7 +22,7 @@ angular.module('booktitresApp')
                   }
 
                   this.getCurrentTime = function () {
-                    return parseFloat(this.media.currentTime.toFixed(2))
+                    return parseFloat(this.media.currentTime.toFixed(1))
                   }
 
                   this.setCurrentTime = function(time) {

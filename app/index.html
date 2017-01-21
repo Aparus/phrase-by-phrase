@@ -55,8 +55,8 @@
                 <div class="list-group">
                     <div class="list-group-item form-inline" ng-repeat="phrase in page.phrases track by $index">{{$index}}.
                        <input class="form-control" type="text" ng-model="phrase.text">     
-                       <input class="form-control phrase-timing"  ng-model="phrase.timingStart" >
-                       <input class="form-control phrase-timing"  ng-model="phrase.timingEnd">
+                       <input class="form-control phrase-timing"  ng-model="phrase.timingStart" type="number" step="0.1" >
+                       <input class="form-control phrase-timing"  ng-model="phrase.timingEnd" type="number" step="0.1" >
                        <span class="glyphicon glyphicon-volume-up" ng-click="playPhrase($index)"></span>
                     </div>
                 </div> 
@@ -78,26 +78,6 @@
    
     </div>
     
-    <div class="container" ng-controller="TableTestController">
-       <h1>Table test </h1>
-       <table ng-repeat="row in table track by $index">
-            <tr>
-                <td>
-                    <input type=number ng-model="row.col1">
-                </td>
-                <td>
-                    <input type=number ng-model="row.col2">
-                </td>
-                <td>
-                    <input type=number ng-model="row.col3">
-                </td>
-                <td>
-                    {{$index}}
-                </td>
-            </tr>     
-        </table>
-        <button class="btn btn-success" ng-click="readTable()">Read Table</button>
-    </div>
    
     
 

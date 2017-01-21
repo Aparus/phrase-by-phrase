@@ -69,13 +69,3 @@ angular.module('booktitresApp')
             }            
             //$scope.mediaType = $scope.mediaLink.$modelValue
         }])
-
-        .controller('TableTestController', ['$scope', function($scope) {
-                
-                $scope.table = [{col1: 11, col2: 12, col3:13}, {col1: 21, col2: 22, col3:23}, {col1: 31, col2: 32, col3:33}]
-                
-                $scope.readTable = function(){
-                    
-                    console.log($scope.table)
-                }
-        }])
