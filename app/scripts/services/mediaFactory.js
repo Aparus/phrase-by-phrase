@@ -2,7 +2,7 @@
 
 angular.module('booktitresApp')
         .constant("baseURL","http://localhost:3000/")
-        .factory('mediaFactory', ['$resource', 'baseURL', 'phrasesFactory', function($resource, baseURL, phrasesFactory) {
+        .service('mediaFactory', ['$resource', 'baseURL', 'phrasesFactory', function($resource, baseURL, phrasesFactory) {
             
             
                 var med = this
@@ -18,7 +18,7 @@ angular.module('booktitresApp')
                     this.media.onpause = function(e){
                       mediaOnPause(e.target)
                     }
-                    return med
+                    
                   }
 
                   this.getCurrentTime = function () {
@@ -86,8 +86,7 @@ angular.module('booktitresApp')
                       med.play_mode = "stream"
                     }
             
-            return med
-
+           
         }])
 
 

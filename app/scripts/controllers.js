@@ -5,19 +5,21 @@ angular.module('booktitresApp')
             
             
             $scope.page = {mediaLink:"http://ia801406.us.archive.org/13/items/alice_in_wonderland_librivox/wonderland_ch_01.mp3", mediaType:""} 
-            $scope.media = {}
-            $scope.isAudio = false
-            $scope.mediaObject = {}
             
-           phrasesFactory.setPhrases()
-           $scope.phrases = phrasesFactory.get()
+            $scope.isAudio = false
+            
+            $scope.page.phrases = phrasesFactory.getPhrases()
            
+           //phrasesFactory.setPhrases()
+           //console.log('$scope.phrases', $scope.phrases.get())
+           
+           // when we input media link , if it's real resource, create an audio element in the page
             $scope.$watch("page.mediaLink", function(value){
                 
                 if(mediaFactory.type(value) == "audio") 
                     {
                         $scope.isAudio = true                      
-                        mediaFactory.setMedia(document.getElementById('media'))               
+                        mediaFactory.setMedia(document.getElementById('mediaElement'))               
                     }
                 else 
                     $scope.isAudio = false
@@ -45,10 +47,11 @@ angular.module('booktitresApp')
                                         "timingEnd": mediaFactory.getCurrentTime()
                                       })
                     }
-                //phrasesFactory.setCurrentPhrase(curPhraseNum +1)   
-                  $scope.phrases = phrasesFactory.get()
-                  console.log('$scope.phrases', $scope.phrases)
-                  console.log('phrasesFactory', phrasesFactory.get())
+                   
+                  //$scope.page.phrases = phrasesFactory.getPhrases()
+                  //phrasesFactory.setCurrentPhrase(curPhraseNum +1)
+                  //console.log('$scope.phrases', $scope.page.phrases)
+                  console.log('phrasesFactory', phrasesFactory.getPhrases())
               }
             
             $scope.playPhrase = function(phraseNum){
@@ -65,4 +68,14 @@ angular.module('booktitresApp')
                 console.log($scope.phrases[phraseNum])
             }            
             //$scope.mediaType = $scope.mediaLink.$modelValue
+        }])
+
+        .controller('TableTestController', ['$scope', function($scope) {
+                
+                $scope.table = [{col1: 11, col2: 12, col3:13}, {col1: 21, col2: 22, col3:23}, {col1: 31, col2: 32, col3:33}]
+                
+                $scope.readTable = function(){
+                    
+                    console.log($scope.table)
+                }
         }])

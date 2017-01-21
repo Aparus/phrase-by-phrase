@@ -37,7 +37,7 @@
        <h1>BookTitler </h1>
        <p>Great tool for create and use subtitles for audiobooks</p> 
    </div>
-  <div class="container" ng-controller="EditorController">
+  <div class="container" ng-controller="EditorController as EditorCtrl">
 
 
         <h2>1. Редактирование</h2>
@@ -46,17 +46,17 @@
               <div class="col-md-4"> 
                    <label for="mediaLink" class="control-label">Media link</label>
                    <input ng-model="page.mediaLink" placeholder="media link" type="text" name="mediaLink" class="form-control" >
-                   <audio id="media" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls ></audio>
+                   <audio id="mediaElement" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls ></audio>
 
                    <button class="glyphicon glyphicon-screenshot btn-lg" ng-click="setTiming()"></button>
                </div>
             </div>  
             <br />   
                 <div class="list-group">
-                    <div class="list-group-item form-inline" ng-repeat="phrase in phrases track by $index" ng-if="$index > 0">{{$index}}.
-                       <input class="form-control" type="text" value={{phrase.text}}>     
-                       <input class="form-control phrase-timing" type="number" step="0.1" value={{phrase.timingStart}} >
-                       <input class="form-control phrase-timing" type="number" step="0.1" value={{phrase.timingEnd}}>
+                    <div class="list-group-item form-inline" ng-repeat="phrase in page.phrases track by $index">{{$index}}.
+                       <input class="form-control" type="text" ng-model="phrase.text">     
+                       <input class="form-control phrase-timing"  ng-model="phrase.timingStart" >
+                       <input class="form-control phrase-timing"  ng-model="phrase.timingEnd">
                        <span class="glyphicon glyphicon-volume-up" ng-click="playPhrase($index)"></span>
                     </div>
                 </div> 
@@ -76,6 +76,27 @@
             </div>  
        </div>
    
+    </div>
+    
+    <div class="container" ng-controller="TableTestController">
+       <h1>Table test </h1>
+       <table ng-repeat="row in table track by $index">
+            <tr>
+                <td>
+                    <input type=number ng-model="row.col1">
+                </td>
+                <td>
+                    <input type=number ng-model="row.col2">
+                </td>
+                <td>
+                    <input type=number ng-model="row.col3">
+                </td>
+                <td>
+                    {{$index}}
+                </td>
+            </tr>     
+        </table>
+        <button class="btn btn-success" ng-click="readTable()">Read Table</button>
     </div>
    
     

@@ -2,20 +2,22 @@
 
 angular.module('booktitresApp')
         .constant("baseURL","http://localhost:3000/")
-        .factory('phrasesFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+        .service('phrasesFactory', ['$resource', 'baseURL', function($resource, baseURL) {
             
             
             var phr = this
-
+            
+            this.phrases = [{timingStart: 0, timingEnd: 0, text: ""}]
+            this.language = "unknown"
+            this.currentPhrase = 0
+            
             this.setPhrases = function(phrases_input){
                 
                 if(typeof phrases_input == "undefined")
                     this.phrases = [{timingStart: 0, timingEnd: 0, text: ""}]
                 else this.phrases = phrases_input
                 
-                this.language = "unknown"
-                this.currentPhrase = 0
-                return phr 
+
             }
             
           this.setLanguage = function(lang){
@@ -31,7 +33,7 @@ angular.module('booktitresApp')
             return this.currentPhrase
           }
 
-          this.get = function() {
+          this.getPhrases = function() {
             return this.phrases
           }
 
@@ -74,14 +76,14 @@ angular.module('booktitresApp')
               for (key in restoredPhrases) {
                   this[key] = restoredPhrases[key]
               }
-              Phrases.setCurrentPhrase(0)
+              phrasesFactory.setCurrentPhrase(0)
               //riot.update()
             }
             catch(e){console.log("No data for restore in localStorage")}
 
           }
             
-            return phr
+ 
 
         }])
 
