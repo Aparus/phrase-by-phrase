@@ -39,11 +39,35 @@ angular.module('booktitresApp')
 
                   this.playPhrase = function(phraseNum){
                     this.play_mode = "phrase"
+                    if(typeof phraseNum == "undefined") 
+                        var phraseNum = phrasesFactory.getCurrentPhraseNum()
                     phrasesFactory.setCurrentPhrase(phraseNum)
                     var phrase = phrasesFactory.getPhrase(phraseNum)
                     this.media.currentTime = phrase.timingStart
                     this.media.play()
+                  }
+                  
+                  this.playNextPhrase = function() {
+                      var phraseNum = phrasesFactory.getCurrentPhraseNum() + 1
+                      med.playPhrase(phraseNum)
+                  }
 
+                  this.playPreviousPhrase = function() {
+                      var phraseNum = phrasesFactory.getCurrentPhraseNum() - 1
+                      med.playPhrase(phraseNum)
+                  }
+                  
+                  this.playEndOfPhrase = function(phraseNum, sec) {
+                      this.play_mode = "phrase"
+                      var phrase = phrasesFactory.getPhrase(phraseNum)
+                      if (sec > 0) {
+                          this.media.currentTime = phrase.timingEnd - sec
+                      }
+                      else {
+                          this.media.currentTime = phrase.timingEnd + sec 
+                          //this idea should be upgrage, because it's part of other phrase      
+                      }
+                      this.media.play()
                   }
 
                   this.type = function(link) {
@@ -86,6 +110,28 @@ angular.module('booktitresApp')
                       med.play_mode = "stream"
                     }
             
+            
+         this.setTimingLive = function() {
+             
+                var curPhraseNum = phrasesFactory.getCurrentPhraseNum()
+                var prevPhrase = phrasesFactory.getPhrase(curPhraseNum - 1)
+
+                    if(curPhraseNum > phrasesFactory.length()) {
+                        //mediaFactory.pause()
+                        phrasesFactory.updatePhrase(curPhraseNum, {
+                                      timingStart:  prevPhrase.timingEnd,
+                                      timingEnd: med.getCurrentTime(),
+                                      text: ""
+                                      })
+                    }
+
+                    else {
+                      phrasesFactory.updatePhrase(curPhraseNum, {
+                                        "timingStart": prevPhrase.timingEnd,
+                                        "timingEnd": med.getCurrentTime()
+                                      })
+                    }
+        }           
            
         }])
 

@@ -1,7 +1,7 @@
 'use strict';
 angular.module('booktitresApp')
 
-        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', function($scope, mediaFactory, phrasesFactory) {
+        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', 'subsFactory', function($scope, mediaFactory, phrasesFactory, subsFactory) {
             
             
             $scope.page = {mediaLink:"http://ia801406.us.archive.org/13/items/alice_in_wonderland_librivox/wonderland_ch_01.mp3", mediaType:""} 
@@ -23,49 +23,13 @@ angular.module('booktitresApp')
                     }
                 else 
                     $scope.isAudio = false
-            });            
- 
+            });     
             
-            $scope.setTiming = function() {
-                
-                var curPhraseNum = phrasesFactory.getCurrentPhraseNum()
-                    console.log('curPhraseNum', curPhraseNum)
-                var prevPhrase = phrasesFactory.getPhrase(curPhraseNum - 1)
+            $scope.mediaFactory = mediaFactory
+            $scope.phrasesFactory = phrasesFactory
+            $scope.subsFactory = subsFactory
+            
 
-                    if(curPhraseNum > phrasesFactory.length()) {
-                        //mediaFactory.pause()
-                        phrasesFactory.updatePhrase(curPhraseNum, {
-                                      timingStart:  prevPhrase.timingEnd,
-                                      timingEnd: mediaFactory.getCurrentTime(),
-                                      text: ""
-                                      })
-                    }
+            
 
-                    else {
-                      phrasesFactory.updatePhrase(curPhraseNum, {
-                                        "timingStart": prevPhrase.timingEnd,
-                                        "timingEnd": mediaFactory.getCurrentTime()
-                                      })
-                    }
-                   
-                  //$scope.page.phrases = phrasesFactory.getPhrases()
-                  //phrasesFactory.setCurrentPhrase(curPhraseNum +1)
-                  //console.log('$scope.phrases', $scope.page.phrases)
-                  console.log('phrasesFactory', phrasesFactory.getPhrases())
-              }
-            
-            $scope.playPhrase = function(phraseNum){
-                mediaFactory.playPhrase(phraseNum)
-            }
-            
-            $scope.timingStartChanged = function(phraseNum, $event){
-                phrasesFactory.updatePhrase(phraseNum, {timingStart: $event.target.value} )
-                console.log($scope.phrases[phraseNum])
-            }
-            
-            $scope.timingEndChanged = function(phraseNum, $event){
-                phrasesFactory.updatePhrase(phraseNum, {timingEnd: $event.target.value} )
-                console.log($scope.phrases[phraseNum])
-            }            
-            //$scope.mediaType = $scope.mediaLink.$modelValue
         }])

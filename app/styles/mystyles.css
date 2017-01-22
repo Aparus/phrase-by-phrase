@@ -6,3 +6,7 @@ textarea {
 input {width: 100%;} 
 
 input.phrase-timing {width: 100px!important;}
+
+audio {
+    width: 100%;
+}
