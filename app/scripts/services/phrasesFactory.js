@@ -7,7 +7,7 @@ angular.module('booktitresApp')
             
             var phr = this
             
-            this.phrases = [{timingStart: 0, timingEnd: 0, text: ""}]
+            this.phrases = [{timingStart: 0, timingEnd: 0, text: "", word0: 0, word1: 0}]
             this.language = "unknown"
             this.currentPhrase = 0
             

@@ -22,3 +22,27 @@ textarea {
     font-family: Arial Unicode MS;
     font-size: 16px!important;
 }
+
+
+.word:hover{
+  text-decoration: underline;
+  color: darkblue;
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.word-block {
+  display: inline-block;
+}
+
+.startOfPhrase{
+  border: 1px solid green;
+}
+
+.endOfPhrase{
+  border: 1px solid red;
+}
+
+.middleOfPhrase{
+  border: 1px solid white;
+}

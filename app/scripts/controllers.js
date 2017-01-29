@@ -1,7 +1,7 @@
 'use strict';
 angular.module('booktitresApp')
 
-        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', 'subsFactory', function($scope, mediaFactory, phrasesFactory, subsFactory) {
+        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', 'subsFactory', 'wordsFactory', function($scope, mediaFactory, phrasesFactory, subsFactory, wordsFactory) {
             
             
             $scope.page = {mediaLink:"http://ia801406.us.archive.org/13/items/alice_in_wonderland_librivox/wonderland_ch_01.mp3", mediaType:""} 
@@ -28,19 +28,22 @@ angular.module('booktitresApp')
             $scope.mediaFactory = mediaFactory
             $scope.phrasesFactory = phrasesFactory
             $scope.subsFactory = subsFactory
+            $scope.wordsFactory = wordsFactory
             
-            $scope.isSelected = function (checkTab) {
-                return ($scope.tab === checkTab);
-            };
-            
-            $scope.select = function(setTab) {
-                $scope.tab = setTab;
-                console.log($scope.tab)
+            $scope.wordClicked = function(index){
+                  var prevPhrase = phrasesFactory.getPhrase(phrasesFactory.getCurrentPhraseNum() - 1)
+                  var word0 = (wordsFactory.getWord(prevPhrase.word1 + 1).trim() != "") ? prevPhrase.word1 + 1 : prevPhrase.word1 + 2
+
+                  phrasesFactory.updatePhrase(phrasesFactory.getCurrentPhraseNum(), {
+                                word0: word0,
+                                word1: index,
+                                timingStart:  prevPhrase.timingEnd,
+                                timingEnd: mediaFactory.getCurrentTime(),
+                                text: wordsFactory.getPhraseFromWords(word0, index+1)
+                                })  
+                  console.log(phrasesFactory.getPhrases())
             }
             
-            $scope.fuck = function (){
-                console.log("bbbbb")
-            }
 
             $scope.readSubs = function(subs_text){
 
@@ -54,6 +57,11 @@ angular.module('booktitresApp')
                 else if(subs_type = "htmlAudioBook")
                         phrasesFactory.setPhrases(subsFactory.parseAudioBookHtml(subs_text));
                         $scope.page.phrases = phrasesFactory.getPhrases()
+            }
+            
+            $scope.readWords = function(text){
+                wordsFactory.setWords(text.split(/\s/))
+                console.log(wordsFactory.getWords())
             }
             
 

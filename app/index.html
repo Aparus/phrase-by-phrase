@@ -98,13 +98,20 @@
                                    <p>Translation text</p>
                                     <textarea ng-model="translationText" class="form-control"></textarea>
                                 </div> 
-                                <button class="btn btn-info" ng-click="readSubs(originalText)">Read Subs</button> 
+                                <button class="btn btn-info" ng-click="readSubs(originalText)">Read Subs</button>
+                                <button class="btn btn-success" ng-click="readWords(originalText)">Read Words</button>  
                            </div>
                 </div>
                 <div class="tab-pane" id="3">
-                      <h3>add clearfix to tab-content (see the css)</h3>
+                      <h2>3. Words mode</h2>
+                            <div name="text-output" id="textOutput">
+                              <div class="word-block">
+                                <span ng-repeat="word in wordsFactory.getWords() track by $index" ng-if=' word.trim()!=""'  ng-click="wordClicked($index)" ng-class="wordsFactory.getWordStatus($index)">{{word}} </span>
+                              </div>
+                              <!-- <br / ng-if='word.trim()==""'> <br / ng-if='word.trim()==""'> --> 
+                          </div>
                 </div>
-                <div class="tab-pane" id="3">
+                <div class="tab-pane" id="4">
                       <h3>add clearfix to tab-content (see the css)</h3>
                 </div>
 			</div>
@@ -142,6 +149,7 @@
     <script src="scripts/services/mediaFactory.js"></script>
     <script src="scripts/services/phrasesFactory.js"></script>   
     <script src="scripts/services/subsFactory.js"></script>   
+    <script src="scripts/services/wordsFactory.js"></script>   
     
 <!-- endbuild -->
 
