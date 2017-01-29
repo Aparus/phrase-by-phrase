@@ -6,7 +6,19 @@ textarea {
 input {width: 100%;} 
 
 input.phrase-timing {width: 100px!important;}
+input.phrase-text {width: 70%!important;}
 
 audio {
     width: 100%;
+}
+
+textarea {
+    overflow-x: auto;
+    word-wrap: normal;
+    white-space: pre;
+    line-height: 2!important;
+    background-image: linear-gradient(white, white 30px, #ccc 30px, #ccc 31px, white 31px)!important;
+    background-size: 100% 32px;
+    font-family: Arial Unicode MS;
+    font-size: 16px!important;
 }
