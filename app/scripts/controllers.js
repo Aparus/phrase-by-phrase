@@ -8,7 +8,7 @@ angular.module('booktitresApp')
             
             $scope.isAudio = false
             $scope.tab = 1
-            $scope.page.phrases = phrasesFactory.getPhrases()
+            //$scope.page.phrases = phrasesFactory.getPhrases()
            
            //phrasesFactory.setPhrases()
            //console.log('$scope.phrases', $scope.phrases.get())

@@ -61,6 +61,19 @@ angular.module('booktitresApp')
 
             //this.trigger('updated')
           }
+          
+          this.deletePhrase = function(phraseNum) {
+              phr.phrases = phr.phrases.filter(
+                  function(elem, index){
+                      if(index != phraseNum) {
+                          return phr.phrases[index]
+                          
+                      }
+                            
+              })
+              
+              
+          }
 
           this.length = function() {
             return this.phrases.length-1

@@ -46,3 +46,7 @@ textarea {
 .middleOfPhrase{
   border: 1px solid white;
 }
+
+div.br {
+    padding: 10px; 
+}
