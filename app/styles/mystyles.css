@@ -5,8 +5,8 @@ textarea {
 }
 input {width: 100%;} 
 
-input.phrase-timing {width: 100px!important;}
-input.phrase-text {width: 70%!important;}
+input.phrase-timing {width: 80px!important;}
+input.phrase-text {width: 60%!important;}
 
 audio {
     width: 100%;
@@ -49,4 +49,37 @@ textarea {
 
 div.br {
     padding: 10px; 
+}
+
+.phrase-input input {
+        height: 20px; 
+}
+.phrase-input .label {
+    width: 31px!important;
+}
+.red {
+    background-color: red; 
+}
+
+.green {
+    background-color: green; 
+}
+
+.affix {
+    width: 300px;
+    top: 0px;
+    z-index: 9999;
+}
+
+.player-block {
+    /*background-color: antiquewhite;*/
+    width: 300px;
+}
+
+.container {
+    margin: 0;
+}
+
+.tab-content {
+    
 }

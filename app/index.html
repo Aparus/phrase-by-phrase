@@ -37,108 +37,85 @@
        <h1>BookTitler </h1>
        <p>Great tool for create and use subtitles for audiobooks</p> 
    </div>
-  <div class="container" ng-controller="EditorController as EditorCtrl">
+  <div class="container" ng-controller="EditorController">
         <!-- INPUT MEDIA LINK  -->
-        <div class="row">
-                <div class="col-md-6"> 
-                   <label for="mediaLink" class="control-label">Media link</label>
-                   <input ng-model="page.mediaLink" placeholder="media link" type="text" name="mediaLink" class="form-control" >
-                   <audio id="mediaElement" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls ></audio>
-                   <div class="phrase-player-controls">
-                        <button class="glyphicon glyphicon-repeat btn-info" title="repeat" ng-click="mediaFactory.playPhrase()"></button>
-                        <button class="glyphicon glyphicon-step-backward btn-info" title="previous phrase" ng-click="mediaFactory.playPreviousPhrase()"></button>
-                        <button class="glyphicon glyphicon-step-forward btn-info" title="next phrase" ng-click="mediaFactory.playNextPhrase()"></button>
-                        <button class=" btn-info">{{phrasesFactory.getCurrentPhraseNum()}} / {{phrasesFactory.length()}}</button>
-                   </div>
-               </div>
-        </div>
+        <ul class="nav nav-pills">
+            <li class="active"> <a  href="#1" data-toggle="tab">Phrases</a> </li>
+            <li> <a href="#2" data-toggle="tab">Texts</a> </li>
+            <li> <a href="#3" data-toggle="tab">Words</a> </li>
+            <li> <a href="#4" data-toggle="tab">Player</a> </li>
+        </ul>
+    <div class="row">
+           <div class="col-md-4">
+                <div class="player-block panel panel-default" data-spy="affix" data-offset="250">
+                              <div class="panel-body">
+                                   <label for="mediaLink" class="control-label">Media link
+                                       <input ng-model="page.mediaLink" placeholder="media link" type="text" name="mediaLink" class="form-control" >
+                                   </label>
+                                   <audio id="mediaElement" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls ></audio>
+                                   <div class="phrase-player-controls">
+                                        <button class="glyphicon glyphicon-repeat btn-info" title="repeat" ng-click="mediaFactory.playPhrase()"></button>
+                                        <button class="glyphicon glyphicon-step-backward btn-info" title="previous phrase" ng-click="mediaFactory.playPreviousPhrase()"></button>
+                                        <button class="glyphicon glyphicon-step-forward btn-info" title="next phrase" ng-click="mediaFactory.playNextPhrase()"></button>
+                                        <button class=" btn-info">{{phrasesFactory.currentPhrase}} / {{phrasesFactory.length()}}</button>
+                                        <button class="btn btn-info btn-sm" ng-click="mediaFactory.setTimingLive()">Add phrase</button>
+                                   </div>                          
+                              </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content ">
+                      <div class="tab-pane active" id="1">
+                            <div class="row">           
+                                    <div class="list-group">
+                                        <div class="form-inline phrase-input" ng-repeat="phrase in phrasesFactory.getPhrases() track by $index" ng-if="$index > 0" ng-class="{active : $index==phrasesFactory.getCurrentPhraseNum()}">
+                                           <span class="label" ng-class="$index==phrasesFactory.getCurrentPhraseNum() ? 'label-info' : 'label-default'">{{$index}}</span>
+                                           <input class="form-control phrase-text" type="text" ng-model="phrase.text">     
+                                           <input class="form-control phrase-timing"  ng-model="phrase.timingStart" type="number" step="0.1" ng-change="mediaFactory.playPhrase($index)" >
+                                           <input class="form-control phrase-timing"  ng-model="phrase.timingEnd" type="number" step="0.1" ng-change="mediaFactory.playEndOfPhrase($index, 1)">
+                                           <button class="glyphicon glyphicon-chevron-down btn-default" title="Merge with next phrase"></button>     
+                                           <button class="glyphicon glyphicon-volume-up btn-info" ng-click="mediaFactory.playPhrase($index)"></button>
+                                           <button class="glyphicon glyphicon-remove" ng-click="phrasesFactory.deletePhrase($index)"></button>
 
-<div class="container">	
-
-        <ul class="nav nav-tabs">
-                <li class="active">
-                    <a  href="#1" data-toggle="tab">Phrases</a>
-                </li>
-                <li>
-                    <a href="#2" data-toggle="tab">Texts</a>
-                </li>
-                <li>
-                    <a href="#3" data-toggle="tab">Words</a>
-                </li>
-                <li>
-                    <a href="#4" data-toggle="tab">Player</a>
-                </li>
-		</ul>
-
-			<div class="tab-content ">
-                  <div class="tab-pane active" id="1">
-                        <div class="row">
-                                 <h2>1. Timing creator </h2>            
-                                <button class="glyphicon glyphicon-screenshot btn-lg" ng-click="mediaFactory.setTimingLive()"></button>
-
-                                <div class="list-group">
-                                    <div class="list-group-item form-inline" ng-repeat="phrase in phrasesFactory.getPhrases() track by $index" ng-if="$index > 0">{{$index}}.
-                                       <input class="form-control phrase-text" type="text" ng-model="phrase.text">     
-                                       <input class="form-control phrase-timing"  ng-model="phrase.timingStart" type="number" step="0.1" ng-change="mediaFactory.playPhrase($index)" >
-                                       <input class="form-control phrase-timing"  ng-model="phrase.timingEnd" type="number" step="0.1" ng-change="mediaFactory.playEndOfPhrase($index, 1)">
-                                       <button class="glyphicon glyphicon-chevron-down btn-default" title="Merge with next phrase"></button>     
-                                       <button class="glyphicon glyphicon-volume-up btn-info" ng-click="mediaFactory.playPhrase($index)"></button>
-                                       <button class="glyphicon glyphicon-remove" ng-click="phrasesFactory.deletePhrase($index)"></button>
-                                       
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                         </div>
+                     <div class="tab-pane" id="2">
+                                <div class="row" >
+                                    <h2>2. Textareas mode (bulk adding of phrases)</h2>
+                                    <div class="col-md-6">
+                                       <p>Original text</p>
+                                        <textarea ng-model="originalText" class="form-control"></textarea>    
+                                    </div> 
+                                    <div class="col-md-6">
+                                       <p>Translation text</p>
+                                        <textarea ng-model="translationText" class="form-control"></textarea>
+                                    </div> 
+                                    <button class="btn btn-info" ng-click="readSubs(originalText)">Read Subs</button>
+                                    <button class="btn btn-success" ng-click="readWords(originalText)">Read Words</button>  
+                               </div>
                     </div>
-                 <div class="tab-pane" id="2">
-                            <div class="row" >
-                                <h2>2. Textareas mode (bulk adding of phrases)</h2>
-                                <div class="col-md-6">
-                                   <p>Original text</p>
-                                    <textarea ng-model="originalText" class="form-control"></textarea>    
-                                </div> 
-                                <div class="col-md-6">
-                                   <p>Translation text</p>
-                                    <textarea ng-model="translationText" class="form-control"></textarea>
-                                </div> 
-                                <button class="btn btn-info" ng-click="readSubs(originalText)">Read Subs</button>
-                                <button class="btn btn-success" ng-click="readWords(originalText)">Read Words</button>  
-                           </div>
-                </div>
-                <div class="tab-pane" id="3">
-                      <h2>3. Words mode</h2>
-                            <div name="text-output" id="textOutput">
-                              
-                                <span ng-if=' word.trim()!=""' ng-repeat-start="word in wordsFactory.getWords() track by $index"  ng-click="wordClicked($index)" ng-class="wordsFactory.getWordStatus($index)">{{word}} </span>
-                                <div class="br" ng-if='word.trim() == ""' ng-repeat-end></div>
+                    <div class="tab-pane" id="3">
+                          <h2>3. Words mode</h2>
+                                <div name="text-output" id="textOutput">
 
-                              
-                          </div>
-                </div>
-                <div class="tab-pane" id="4">
-                      <h3>add clearfix to tab-content (see the css)</h3>
-                </div>
-			</div>
-  </div> 
+                                    <span ng-if=' word.trim()!=""' ng-repeat-start="word in wordsFactory.getWords() track by $index"  ng-click="wordClicked($index)">{{word}} </span>
+                                    <div class="br" ng-if='word.trim() == ""' ng-repeat-end></div>
 
- 
 
-   
+                              </div>
+                    </div>
+                    <div class="tab-pane" id="4">
+                          <h3>add clearfix to tab-content (see the css)</h3>
+                    </div>
+                </div> 
+            </div> 
+        </div>      
     </div>
-    
- 
+
    
-     
-       
-         
-
-
-             
-               
-                 
-                   
-  
     
-
 <!-- build:js scripts/main.js -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

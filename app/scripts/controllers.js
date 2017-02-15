@@ -13,22 +13,32 @@ angular.module('booktitresApp')
            //phrasesFactory.setPhrases()
            //console.log('$scope.phrases', $scope.phrases.get())
            
-           // when we input media link , if it's real resource, create an audio element in the page
-            $scope.$watch("page.mediaLink", function(value){
-                
-                if(mediaFactory.type(value) == "audio") 
-                    {
-                        $scope.isAudio = true                      
-                        mediaFactory.setMedia(document.getElementById('mediaElement'))               
-                    }
-                else 
-                    $scope.isAudio = false
-            });     
+    
             
             $scope.mediaFactory = mediaFactory
             $scope.phrasesFactory = phrasesFactory
             $scope.subsFactory = subsFactory
             $scope.wordsFactory = wordsFactory
+            
+            // when we input media link , if it's real resource, create an audio element in the page
+            $scope.$watch("page.mediaLink", function(value){
+                
+                if(mediaFactory.type(value) == "audio") 
+                    {
+                        $scope.isAudio = true                      
+                        mediaFactory.setMedia(document.getElementById('mediaElement')) 
+                        
+                            $scope.mediaFactory.media.ontimeupdate = function(e){
+                              $scope.mediaOnTimeUpdate(e.target, $scope.mediaFactory.play_mode)
+                            }
+                            $scope.mediaFactory.media.onpause = function(e){
+                              $scope.mediaOnPause(e.target)
+                            }          
+                    }
+                else 
+                    $scope.isAudio = false
+            }); 
+            
             
             $scope.wordClicked = function(index){
                   var prevPhrase = phrasesFactory.getPhrase(phrasesFactory.getCurrentPhraseNum() - 1)
@@ -57,14 +67,44 @@ angular.module('booktitresApp')
                 else if(subs_type = "htmlAudioBook")
                         phrasesFactory.setPhrases(subsFactory.parseAudioBookHtml(subs_text));
                         $scope.page.phrases = phrasesFactory.getPhrases()
+                        
+                console.log(subs_type)
             }
             
             $scope.readWords = function(text){
                 wordsFactory.setWords(text.split(/\s/))
-                console.log(wordsFactory.getWords())
+                //console.log(wordsFactory.getWords())
             }
             
 
+            
+
+                  $scope.mediaOnTimeUpdate = function(media, play_mode) {
+                      
+                      var currentPhraseNum = phrasesFactory.getCurrentPhraseNum()
+                      var phrase = phrasesFactory.getPhrase(currentPhraseNum)
+                      try {
+                        if(media.currentTime >= phrase.timingEnd){
+
+                            if(play_mode == "stream") {
+                              phrasesFactory.setCurrentPhrase(currentPhraseNum + 1)
+                              $scope.$apply()
+                            }
+                            else if(play_mode == "phrase"){
+                              media.pause()
+                            }
+                        }
+                      }
+                      catch(e){}
+
+                        
+                    }
+
+                   $scope.mediaOnPause = function(media) {
+                      $scope.mediaFactory.play_mode = "stream"
+                    }            
+            
+            
             
 
         }])

@@ -15,6 +15,7 @@ angular.module('booktitresApp')
                 else if(/Dialogue: 0,\d:\d\d:\d\d.\d\d,\d:\d\d:\d\d.\d\d,Default,,0,0,0,,/.test(text)) type = "ass"
                 else if(/<!--audio start="(.+?)" end="(.+?)"-->([\s\S]+?)<!--\/audio-->/.test(text)) type = "htmlAudioBook"
                 else if(/talk-transcript__fragment/.test(text)) type = "ted"
+                else type = "text_phrases"
                 
                 console.log(type)
                 return type

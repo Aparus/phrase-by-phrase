@@ -12,12 +12,12 @@ angular.module('booktitresApp')
                     this.play_mode = "stream"
                     var obj = this
 
-                    this.media.ontimeupdate = function(e){
+/*                    this.media.ontimeupdate = function(e){
                       mediaOnTimeUpdate(e.target, obj.play_mode)
                     }
                     this.media.onpause = function(e){
                       mediaOnPause(e.target)
-                    }
+                    }*/
                     
                   }
 
@@ -86,7 +86,7 @@ angular.module('booktitresApp')
                   }
 
 
-                  function mediaOnTimeUpdate(media, play_mode) {
+/*                  function mediaOnTimeUpdate(media, play_mode) {
                       
                       var currentPhraseNum = phrasesFactory.getCurrentPhraseNum()
                       var phrase = phrasesFactory.getPhrase(currentPhraseNum)
@@ -103,12 +103,12 @@ angular.module('booktitresApp')
                       }
                       catch(e){}
 
-                        
+                        console.log(phrasesFactory.getCurrentPhraseNum())
                     }
 
                     function mediaOnPause(media) {
                       med.play_mode = "stream"
-                    }
+                    }*/
             
             
          this.setTimingLive = function() {
