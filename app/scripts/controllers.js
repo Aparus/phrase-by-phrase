@@ -1,7 +1,7 @@
 'use strict';
 angular.module('booktitresApp')
 
-        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', 'subsFactory', 'wordsFactory', function($scope, mediaFactory, phrasesFactory, subsFactory, wordsFactory) {
+        .controller('EditorController', ['$scope', 'mediaFactory', 'phrasesFactory', 'subsFactory', 'wordsFactory', 'translationsFactory', function($scope, mediaFactory, phrasesFactory, subsFactory, wordsFactory, translationsFactory) {
             
             
             $scope.page = {mediaLink:"http://ia801406.us.archive.org/13/items/alice_in_wonderland_librivox/wonderland_ch_01.mp3", mediaType:""} 
@@ -9,16 +9,13 @@ angular.module('booktitresApp')
             $scope.isAudio = false
             $scope.tab = 1
             //$scope.page.phrases = phrasesFactory.getPhrases()
-           
-           //phrasesFactory.setPhrases()
-           //console.log('$scope.phrases', $scope.phrases.get())
-           
-    
-            
+
+            console.log(translationsFactory.getAvailableLanguages())
             $scope.mediaFactory = mediaFactory
             $scope.phrasesFactory = phrasesFactory
             $scope.subsFactory = subsFactory
             $scope.wordsFactory = wordsFactory
+            $scope.translationsFactory = translationsFactory
             
             // when we input media link , if it's real resource, create an audio element in the page
             $scope.$watch("page.mediaLink", function(value){
@@ -104,7 +101,9 @@ angular.module('booktitresApp')
                       $scope.mediaFactory.play_mode = "stream"
                     }            
             
-            
-            
+                    $scope.langAdded = function(lang) {
+                        console.log(lang)
+                    }
+                                
 
         }])

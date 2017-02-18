@@ -67,7 +67,7 @@ div.br {
 
 .affix {
     width: 300px;
-    top: 0px;
+    top: 3px;
     z-index: 9999;
 }
 
@@ -82,4 +82,10 @@ div.br {
 
 .tab-content {
     
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
 }

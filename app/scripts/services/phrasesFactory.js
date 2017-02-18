@@ -63,16 +63,7 @@ angular.module('booktitresApp')
           }
           
           this.deletePhrase = function(phraseNum) {
-              phr.phrases = phr.phrases.filter(
-                  function(elem, index){
-                      if(index != phraseNum) {
-                          return phr.phrases[index]
-                          
-                      }
-                            
-              })
-              
-              
+              phr.phrases.splice(phraseNum,1)
           }
 
           this.length = function() {
