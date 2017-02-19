@@ -10,7 +10,6 @@ angular.module('booktitresApp')
             $scope.tab = 1
             //$scope.page.phrases = phrasesFactory.getPhrases()
 
-            console.log(translationsFactory.getAvailableLanguages())
             $scope.mediaFactory = mediaFactory
             $scope.phrasesFactory = phrasesFactory
             $scope.subsFactory = subsFactory
@@ -104,6 +103,8 @@ angular.module('booktitresApp')
                     $scope.langAdded = function(lang) {
                         console.log(lang)
                     }
+                    
+                    $scope.langWithStatus = translationsFactory.getLanguagesCompleteStatusList()
                                 
 
         }])

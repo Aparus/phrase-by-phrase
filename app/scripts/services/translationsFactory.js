@@ -13,10 +13,10 @@ angular.module('booktitresApp')
         this.translationLanguage = "Russian"
 
         this.availableTranslations = [{
-            language: "russian",
+            language: "Russian",
             phrases: ["", "p1", "p2", "p3"]
         }, {
-            language: "hindi",
+            language: "Hindi",
             phrases: ["", "h1", "h2", "h3"]
         }]
 
@@ -73,6 +73,21 @@ angular.module('booktitresApp')
                 return elem.language
             })
             return avLangs.sort()
+        }
+        
+        this.getLanguagesCompleteStatusList = function() {
+            var langAvailable = this.getAvailableLanguages()
+            var translationStatus = "for writing"
+            var langStatuses = this.getLanguagesGeneral().map(function(elem){
+                if(langAvailable.indexOf(elem.name) > -1) {
+                    translationStatus = "for reading"
+                }
+                else {
+                    translationStatus = "for writing"
+                }
+                return {name: elem.name, status: translationStatus}
+            })
+            return langStatuses
         }
 
         this.languagesListGeneral = [{

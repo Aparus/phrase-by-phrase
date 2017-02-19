@@ -63,28 +63,19 @@
                         </div>
                     </div>
 
-                    <div class="dropdown inline">
+                    <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
                                       Select translation
                                       <span class="caret"></span>
                                   </button>
-                        <ul class="dropdown-menu scrollable-menu">
-                            <li ng-repeat="lang in translationsFactory.getAvailableLanguages()" ng-click="langSelected(lang.name)">
-                                <a href="#">{{lang}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    or 
-                    <div class="dropdown inline">
-                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                                      <span class="glyphicon glyphicon-plus"></span>
-                                      Add translation
-                                  </button>
-                        <ul class="dropdown-menu scrollable-menu">
-                            <li ng-repeat="lang in translationsFactory.getLanguagesGeneral()" ng-click="langAdded(lang.name)">
-                                <a href="#">{{lang.name}}</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu list-group" role="menu">
+                            
+                                <p><input  type="checkbox" value=""> Only available for reading </p>
+                            
+                            <a ng-repeat="lang in langWithStatus" ng-click="langSelected(lang.name)" class="list-group-item" ng-class="{'active': lang.status == 'for reading'}">
+                                {{lang.name}} <small ng-class="{'text-muted' : lang.status == 'for writing'}">{{lang.status}}</small>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

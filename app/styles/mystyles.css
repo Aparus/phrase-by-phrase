@@ -3,7 +3,7 @@
 textarea {
     width: 100%;
 }
-input {width: 100%;} 
+ 
 
 input.phrase-timing {width: 80px!important;}
 input.phrase-text {width: 60%!important;}
@@ -84,8 +84,12 @@ div.br {
     
 }
 
-.scrollable-menu {
+.dropdown-menu {
     height: auto;
     max-height: 200px;
     overflow-x: hidden;
+}
+
+.dropdown-menu a {
+    cursor: pointer;
 }
