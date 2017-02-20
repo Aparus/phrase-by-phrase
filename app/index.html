@@ -47,7 +47,7 @@
         <!-- INPUT MEDIA LINK  -->
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="player-block panel panel-default" data-spy="affix" data-offset="250">
                     <div class="panel-body">
                         <label for="mediaLink" class="control-label">Media link
@@ -55,11 +55,11 @@
                                    </label>
                         <audio id="mediaElement" ng-model="page.media" ng-show='isAudio' ng-src="{{page.mediaLink}}" controls></audio>
                         <div class="phrase-player-controls">
-                            <button class="glyphicon glyphicon-repeat btn-info" title="repeat" ng-click="mediaFactory.playPhrase()"></button>
-                            <button class="glyphicon glyphicon-step-backward btn-info" title="previous phrase" ng-click="mediaFactory.playPreviousPhrase()"></button>
-                            <button class="glyphicon glyphicon-step-forward btn-info" title="next phrase" ng-click="mediaFactory.playNextPhrase()"></button>
-                            <button class=" btn-info">{{phrasesFactory.currentPhrase}} / {{phrasesFactory.length()}}</button>
-                            <button class="btn btn-info btn-sm" ng-click="mediaFactory.setTimingLive()">Add phrase</button>
+                            <button class="glyphicon glyphicon-repeat btn btn-info" title="repeat" ng-click="mediaFactory.playPhrase()"></button>
+                            <button class="glyphicon glyphicon-step-backward btn  btn-info" title="previous phrase" ng-click="mediaFactory.playPreviousPhrase()"></button>
+                            <button class="glyphicon glyphicon-step-forward btn  btn-info" title="next phrase" ng-click="mediaFactory.playNextPhrase()"></button>
+                            <button class=" btn  btn-info">{{phrasesFactory.currentPhrase}} / {{phrasesFactory.length()}}</button>
+                            <button class="glyphicon glyphicon-plus btn btn-info" ng-click="mediaFactory.setTimingLive()" title="Add phrase"></button>
                         </div>
                     </div>
 
@@ -79,24 +79,45 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="tab-content ">
                     <div class="tab-pane active" id="1">
-                        <div class="row">
                             <div class="list-group">
                                 <div class="form-inline phrase-input" ng-repeat="phrase in phrasesFactory.getPhrases() track by $index" ng-if="$index > 0" ng-class="{active : $index==phrasesFactory.getCurrentPhraseNum()}">
-                                    <button class="glyphicon glyphicon-volume-up btn btn-default btn-xs" 
+
+                                    <button class="btn btn-default btn-xs play-phrase" 
                                         ng-class="$index==phrasesFactory.getCurrentPhraseNum() ? 'btn-info' : 'btn-default'" 
-                                        ng-click="mediaFactory.playPhrase($index)"> {{$index}}</button>
+                                        ng-click="mediaFactory.playPhrase($index)">
+                                        <span class="glyphicon glyphicon-volume-up"></span>
+                                            {{$index}}
+                                    </button>
+                                    
                                     <input class="form-control phrase-text" type="text" ng-model="phrase.text">
                                     <input class="form-control phrase-timing" ng-model="phrase.timingStart" type="number" step="0.1" ng-change="mediaFactory.playPhrase($index)">
                                     <input class="form-control phrase-timing" ng-model="phrase.timingEnd" type="number" step="0.1" ng-change="mediaFactory.playEndOfPhrase($index, 1)">
-                                    <button class="glyphicon glyphicon-chevron-down btn-default" title="Merge with next phrase"></button>
-                                    <button class="glyphicon glyphicon-remove" ng-click="phrasesFactory.deletePhrase($index)"></button>
+                                    
+                                    <button class="btn btn-default btn-xs" title="Add phrase before" ng-click="phrasesFactory.insertPhraseBefore($index)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        <span class="glyphicon glyphicon-arrow-up"></span>
+                                    </button>
+                                    <button class="btn btn-default btn-xs" title="Add phrase after" ng-click="phrasesFactory.insertPhraseAfter($index)">
+                                        <span class="glyphicon glyphicon-arrow-down"></span> 
+                                        <span class="glyphicon glyphicon-plus"></span>                                                                               
+                                    </button>
+                                    
+                                    <button id="merge-phrase" class="btn btn-default btn-xs" title="Merge with previous">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                        <span class="glyphicon glyphicon-arrow-up"></span>
+                                    </button>
+                                    <button class="btn btn-default btn-xs" title="Merge with next">
+                                        <span class="glyphicon glyphicon-arrow-down"></span>
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                    
+                                    <button class="glyphicon glyphicon-remove btn btn-xs" ng-click="phrasesFactory.deletePhrase($index)" title="Delete"></button>
 
                                 </div>
                             </div>
-                        </div>
                     </div>
                     <div class="tab-pane" id="2">
                         <div class="row">
@@ -148,7 +169,11 @@
     <script src="scripts/services/subsFactory.js"></script>
     <script src="scripts/services/wordsFactory.js"></script>
     <script src="scripts/services/translationsFactory.js"></script>
-
+    <script>
+        $(function () {
+          $('[data-toggle="popover"]').popover({html: true})
+        })
+    </script>
     <!-- endbuild -->
 
 </body>

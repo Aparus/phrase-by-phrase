@@ -5,8 +5,12 @@ textarea {
 }
  
 
-input.phrase-timing {width: 80px!important;}
-input.phrase-text {width: 60%!important;}
+input.phrase-timing {
+    width: 70px!important;
+}
+input.phrase-text {
+    width: 60%!important;
+}
 
 audio {
     width: 100%;
@@ -53,6 +57,7 @@ div.br {
 
 .phrase-input input {
         height: 20px; 
+        padding: 5px; 
 }
 .phrase-input .label {
     width: 31px!important;
@@ -73,7 +78,7 @@ div.br {
 
 .player-block {
     /*background-color: antiquewhite;*/
-    width: 300px;
+    width: 310px;
 }
 
 .container {
@@ -92,4 +97,13 @@ div.br {
 
 .dropdown-menu a {
     cursor: pointer;
+}
+
+.phrase-input button {
+    font-size: 10px; 
+}
+
+.play-phrase {
+    width: 40px; 
+    font-size: 10px!important; 
 }

@@ -105,6 +105,10 @@ angular.module('booktitresApp')
                     }
                     
                     $scope.langWithStatus = translationsFactory.getLanguagesCompleteStatusList()
+                    
+                    $scope.popoverClicked = function(){
+                        console.log("popoverClicked")
+                    }
                                 
 
         }])

@@ -86,8 +86,26 @@ angular.module('booktitresApp')
             catch(e){console.log("No data for restore in localStorage")}
 
           }
-            
-
+          // inserts default blank phrase after selected , for further editing 
+          
+          this.insertPhraseAfter = function (phraseNum){
+              var currentPhrase = this.getPhrase(phraseNum)
+              var defaultPhraseAfter = {timingStart: currentPhrase.timingEnd, timingEnd: 9999, text: "", word0: 0, word1: 0}
+              this.phrases.splice(phraseNum + 1, 0, defaultPhraseAfter)
+              this.setCurrentPhrase(phraseNum + 1)
+          }
+          
+          this.insertPhraseBefore = function (phraseNum){
+              var phraseBeforeCurrent = this.getPhrase(phraseNum-1)
+              try{
+                var defaultPhraseBefore = {timingStart: phraseBeforeCurrent.timingEnd, timingEnd: 9999, text: "", word0: 0, word1: 0}
+              }
+              catch(e){
+                var defaultPhraseBefore = {timingStart: 0, timingEnd: 9999, text: "", word0: 0, word1: 0}                  
+              }
+              this.phrases.splice(phraseNum, 0, defaultPhraseBefore)
+              this.setCurrentPhrase(phraseNum)
+          }          
 
         }])
 
