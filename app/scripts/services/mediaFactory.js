@@ -121,16 +121,19 @@ angular.module('booktitresApp')
                         phrasesFactory.updatePhrase(curPhraseNum, {
                                       timingStart:  prevPhrase.timingEnd,
                                       timingEnd: med.getCurrentTime(),
-                                      text: ""
+                                      text: "", 
+                                      word0: 0, 
+                                      word1: 0
                                       })
                     }
 
                     else {
                       phrasesFactory.updatePhrase(curPhraseNum, {
-                                        "timingStart": prevPhrase.timingEnd,
-                                        "timingEnd": med.getCurrentTime()
+                                        timingStart: prevPhrase.timingEnd,
+                                        timingEnd: med.getCurrentTime(), 
                                       })
                     }
+             console.log(phrasesFactory.getPhrases())
         }           
            
         }])

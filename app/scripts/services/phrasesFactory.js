@@ -34,7 +34,7 @@ angular.module('booktitresApp')
           }
 
           this.getPhrases = function() {
-            return this.phrases
+            return phr.phrases
           }
 
           this.getPhrase = function(i){
@@ -51,15 +51,16 @@ angular.module('booktitresApp')
           this.updatePhrase = function(phraseNum, params) {
             //if phrase exist we update it
             try {
-              var phrase = this.getPhrase(phraseNum)
-              for (key in params) phrase[key] = params[key]
+              var phrase = phr.getPhrase(phraseNum)
+              for (var key in params) {
+                  phrase[key] = params[key]
+              }
             }
             //if not exist we push phrase
             catch(e) {
-              this.phrases.push(params)
+              phr.phrases.push(params)
+              console.log(e)
             }
-
-            //this.trigger('updated')
           }
           
           this.deletePhrase = function(phraseNum) {
@@ -96,16 +97,32 @@ angular.module('booktitresApp')
           }
           
           this.insertPhraseBefore = function (phraseNum){
-              var phraseBeforeCurrent = this.getPhrase(phraseNum-1)
+              var prevPhrase = this.getPhrase(phraseNum-1)
               try{
-                var defaultPhraseBefore = {timingStart: phraseBeforeCurrent.timingEnd, timingEnd: 9999, text: "", word0: 0, word1: 0}
+                var defaultPhraseBefore = {timingStart: prevPhrase.timingEnd, timingEnd: 9999, text: "", word0: 0, word1: 0}
               }
               catch(e){
                 var defaultPhraseBefore = {timingStart: 0, timingEnd: 9999, text: "", word0: 0, word1: 0}                  
               }
               this.phrases.splice(phraseNum, 0, defaultPhraseBefore)
               this.setCurrentPhrase(phraseNum)
-          }          
+          } 
+          
+          this.mergeWithPrevPhrase = function(phraseNum){
+              var prevPhrase = this.getPhrase(phraseNum-1)
+              var curPhrase = this.getPhrase(phraseNum)
+              var mergedPhrase = {
+                                    "timingStart": prevPhrase.timingStart, 
+                                    "timingEnd": curPhrase.timingEnd, 
+                                    "text": prevPhrase.text + " " + curPhrase.text, 
+                                    "word0": prevPhrase.word0, 
+                                    "word1": curPhrase.word1
+                                }
+             
+              this.updatePhrase(phraseNum-1, mergedPhrase)
+              this.deletePhrase(phraseNum)
+              console.log(phraseNum)
+          }
 
         }])
 
