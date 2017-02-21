@@ -123,7 +123,22 @@ angular.module('booktitresApp')
               this.deletePhrase(phraseNum)
               console.log(phraseNum)
           }
-
+          
+          this.mergeWithNextPhrase = function(phraseNum){
+              var nextPhrase = this.getPhrase(phraseNum+1)
+              var curPhrase = this.getPhrase(phraseNum)
+              var mergedPhrase = {
+                                    "timingStart": curPhrase.timingStart, 
+                                    "timingEnd": nextPhrase.timingEnd, 
+                                    "text": curPhrase.text + " " + nextPhrase.text, 
+                                    "word0": curPhrase.word0, 
+                                    "word1": nextPhrase.word1
+                                }
+             
+              this.updatePhrase(phraseNum+1, mergedPhrase)
+              this.deletePhrase(phraseNum)
+              
+          }
         }])
 
 
