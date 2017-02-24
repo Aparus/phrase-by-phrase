@@ -8,7 +8,8 @@ angular.module('booktitresApp')
             var phr = this
             
             this.phrases = [{timingStart: 0, timingEnd: 0, text: "", word0: 0, word1: 0}]
-            this.language = "unknown"
+            
+            this.language = "English"
             this.currentPhrase = 0
             
             this.setPhrases = function(phrases_input){
@@ -20,9 +21,13 @@ angular.module('booktitresApp')
 
             }
             
-          this.setLanguage = function(lang){
+        this.getCurrentLanguage = function (){
+            return this.language
+        }
+        
+        this.setCurrentLanguage = function(lang){
             this.language = lang
-          }
+        }
 
           this.setCurrentPhrase = function(phraseNum){
             this.currentPhrase = phraseNum

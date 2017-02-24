@@ -3,13 +3,23 @@
 textarea {
     width: 100%;
 }
- 
+
+.block-for-inputs {
+    display: inline-block;
+    vertical-align: middle;
+    width: 60%;
+}
+
+.block-for-inputs .form-control {
+    display: block;
+    width: 100%; 
+}
 
 input.phrase-timing {
     width: 70px!important;
 }
 input.phrase-text {
-    width: 60%!important;
+    /*width: 60%!important;*/
 }
 
 audio {

@@ -9,8 +9,16 @@ angular.module('booktitresApp')
         //this.translations = { russian : [phrase1, phrase2, phrase3], hindi: [phrase1, phrase2, phrase3]} ??? 
         var tr = this
         this.translations = []
-        this.originalLanguage = "English"
-        this.translationLanguage = "Russian"
+        
+        this.language = "Russian" //default
+        
+        this.getCurrentLanguage = function (){
+            return this.language
+        }
+        
+        this.setCurrentLanguage = function(lang){
+            this.language = lang
+        }
 
         this.availableTranslations = [{
             language: "Russian",
@@ -26,22 +34,6 @@ angular.module('booktitresApp')
 
         this.getLanguagesGeneral = function() {
             return this.languagesListGeneral
-        }
-
-        this.setOriginalLanguage = function(lang) {
-            this.originalLanguage = lang
-        }
-
-        this.setTranslationLanguage = function(lang) {
-            this.translationLanguage = lang
-        }
-
-        this.getOriginalLanguage = function() {
-            return this.originalLanguage
-        }
-
-        this.getTranslationLanguage = function() {
-            return this.translationLanguage
         }
 
         //this.translations = [ { language: "russian", phrases: ["", "p1", "p2", "p3"] }, { language: "hindi", phrases: ["", "h1", "h2", "h3"] }] !!!! 

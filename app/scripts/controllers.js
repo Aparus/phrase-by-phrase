@@ -100,15 +100,36 @@ angular.module('booktitresApp')
                       $scope.mediaFactory.play_mode = "stream"
                     }            
             
-                    $scope.langAdded = function(lang) {
-                        console.log(lang)
+                    $scope.translationLanguageSelected = function(lang) {
+                        translationsFactory.setCurrentLanguage(lang)
                     }
+                    
+                    $scope.originalLanguageSelected = function(lang) {
+                        phrasesFactory.setCurrentLanguage(lang)
+                        console.log(phrasesFactory.getCurrentLanguage())
+                    }                    
+                    
+                    
                     
                     $scope.langWithStatus = translationsFactory.getLanguagesCompleteStatusList()
                     
-                    $scope.popoverClicked = function(){
-                        console.log("popoverClicked")
+                    $scope.translations = translationsFactory.getTranslationsInLang(translationsFactory.getCurrentLanguage())
+                    $scope.phrases = phrasesFactory.getPhrases()
+                    console.log($scope.translations)
+                    $scope.displayTranslations = function(){
+                       console.log(translationsFactory.getAvailableTranslations())
                     }
                                 
 
         }])
+/*        .filter('onlyAvailableForReadingLanguages', function(){
+              return function(avLangs) {
+
+                var output = avLangs.map(function(elem){
+                    return elem.status == "for reading"
+                });
+
+                return output;
+
+          }    
+        })*/
