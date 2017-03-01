@@ -1,0 +1,13 @@
+<div class="row">
+    <h2>2. Textareas mode (bulk adding of phrases)</h2>
+    <div class="col-md-6">
+        <p>Original text</p>
+        <textarea ng-model="originalText" class="form-control"></textarea>
+    </div>
+    <div class="col-md-6">
+        <p>Translation text</p>
+        <textarea ng-model="translationText" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-info" ng-click="readSubs(originalText)">Read Subs</button>
+    <button class="btn btn-success" ng-click="readWords(originalText)">Read Words</button>
+</div>

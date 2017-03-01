@@ -10,7 +10,8 @@ angular.module('booktitresApp')
         var tr = this
         this.translations = []
         
-        this.language = "Russian" //default
+        //this.language = "Russian" //default
+        this.language = "Unknown"
         
         this.getCurrentLanguage = function (){
             return this.language
@@ -20,17 +21,16 @@ angular.module('booktitresApp')
             this.language = lang
         }
 
-        this.availableTranslations = [{
-            language: "Russian",
-            phrases: ["", "p1", "p2", "p3"]
-        }, {
-            language: "Hindi",
-            phrases: ["", "h1", "h2", "h3"]
-        }]
+        this.availableTranslations = {  
+                                        Russian: ["", "p1", "p2", "p3"],  
+                                        Hindi: ["", "h1", "h2", "h3"], 
+                                        Arabic: ["", "ar1", "ar2", "ar3", "ar4"]
+        }
 
         this.getAvailableTranslations = function() {
             return this.availableTranslations
         }
+
 
         this.getLanguagesGeneral = function() {
             return this.languagesListGeneral
@@ -39,31 +39,27 @@ angular.module('booktitresApp')
         //this.translations = [ { language: "russian", phrases: ["", "p1", "p2", "p3"] }, { language: "hindi", phrases: ["", "h1", "h2", "h3"] }] !!!! 
 
         this.getPhraseTranslation = function(lang, phraseNum) {
-            var transl = this.availableTranslations.filter(function(elem) {
-                return elem.language == lang
-            })[0]
-            return transl.phrases[phraseNum]
+            var transl = this.availableTranslations[lang][phraseNum]
+            return transl
         }
 
         this.setPhraseTranslation = function(lang, phraseNum, phraseTranslation) {
-            this.availableTranslations.map(function(elem) {
-                if (elem.language == lang) {
-                    elem.phrases[phraseNum] = phraseTranslation
-                }
-            })
+            this.availableTranslations[lang][phraseNum] = phraseTranslation
         }
 
         this.getTranslationsInLang = function(lang) {
-            var transl = this.availableTranslations.filter(function(elem) {
-                return elem.language == lang
-            })[0]
-            return transl.phrases
+            
+            return this.availableTranslations[lang] || [""]
         }
 
         this.getAvailableLanguages = function() {
-            var avLangs = this.availableTranslations.map(function(elem) {
-                return elem.language
-            })
+            var avLangs = []
+            
+            for (var lang in this.availableTranslations) {
+                avLangs.push(lang)
+            }
+                
+            
             return avLangs.sort()
         }
         

@@ -1,0 +1,8 @@
+<h2>3. Words mode</h2>
+<div name="text-output" id="textOutput">
+
+    <span ng-if=' word.trim()!=""' ng-repeat-start="word in wordsFactory.getWords() track by $index" ng-click="wordClicked($index)">{{word}} </span>
+    <div class="br" ng-if='word.trim() == ""' ng-repeat-end></div>
+
+
+</div>

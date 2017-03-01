@@ -133,7 +133,7 @@ angular.module('booktitresApp')
                                         timingEnd: med.getCurrentTime(), 
                                       })
                     }
-             
+             console.log(phrasesFactory.getPhrases())
         }           
            
         }])

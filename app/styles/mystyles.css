@@ -117,3 +117,20 @@ div.br {
     width: 40px; 
     font-size: 10px!important; 
 }
+
+footer {
+    width: 100%;
+    height: 50px; 
+    background-color: bisque;
+    display: table;  
+    bottom: 0px;
+    text-align: center;
+    position: initial; 
+}
+
+
+footer div {
+    display: table-cell; 
+    vertical-align: middle;
+}
+

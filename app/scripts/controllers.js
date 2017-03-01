@@ -14,8 +14,11 @@ angular.module('booktitresApp')
             $scope.phrasesFactory = phrasesFactory
             $scope.subsFactory = subsFactory
             $scope.wordsFactory = wordsFactory
+            
             $scope.translationsFactory = translationsFactory
             
+            //$scope.translations = translationsFactory.getTranslationsInLang(translationsFactory.getCurrentLanguage())
+            $scope.phrases = phrasesFactory.getPhrases()
             // when we input media link , if it's real resource, create an audio element in the page
             $scope.$watch("page.mediaLink", function(value){
                 
@@ -23,13 +26,15 @@ angular.module('booktitresApp')
                     {
                         $scope.isAudio = true                      
                         mediaFactory.setMedia(document.getElementById('mediaElement')) 
-                        
+                        try {
                             $scope.mediaFactory.media.ontimeupdate = function(e){
                               $scope.mediaOnTimeUpdate(e.target, $scope.mediaFactory.play_mode)
                             }
                             $scope.mediaFactory.media.onpause = function(e){
                               $scope.mediaOnPause(e.target)
-                            }          
+                            }
+                        }
+                        catch(e) {}
                     }
                 else 
                     $scope.isAudio = false
@@ -50,6 +55,12 @@ angular.module('booktitresApp')
                   console.log(phrasesFactory.getPhrases())
             }
             
+            $scope.mergePhrases = function(i1, i2){
+                phrasesFactory.mergePhrases(i1, i2)
+            }
+            $scope.insertPhrase = function(i){
+                phrasesFactory.insertPhrase(i)
+            }
 
             $scope.readSubs = function(subs_text){
 
@@ -98,27 +109,27 @@ angular.module('booktitresApp')
 
                    $scope.mediaOnPause = function(media) {
                       $scope.mediaFactory.play_mode = "stream"
-                    }            
+                    }
+                   
             
                     $scope.translationLanguageSelected = function(lang) {
                         translationsFactory.setCurrentLanguage(lang)
+                        
+                        $scope.translations = translationsFactory.getTranslationsInLang(translationsFactory.getCurrentLanguage())
+                        $scope.hideTranslation = false
+                        console.log("translation language: ", translationsFactory.getCurrentLanguage(), $scope.translations)
                     }
                     
                     $scope.originalLanguageSelected = function(lang) {
                         phrasesFactory.setCurrentLanguage(lang)
-                        console.log(phrasesFactory.getCurrentLanguage())
+                        console.log("original language: ", phrasesFactory.getCurrentLanguage())
                     }                    
                     
-                    
+                    $scope.hideTranslation = true
                     
                     $scope.langWithStatus = translationsFactory.getLanguagesCompleteStatusList()
                     
-                    $scope.translations = translationsFactory.getTranslationsInLang(translationsFactory.getCurrentLanguage())
-                    $scope.phrases = phrasesFactory.getPhrases()
-                    console.log($scope.translations)
-                    $scope.displayTranslations = function(){
-                       console.log(translationsFactory.getAvailableTranslations())
-                    }
+                    
                                 
 
         }])
